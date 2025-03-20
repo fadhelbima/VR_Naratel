@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SDIT Ahmad Yani - Sliding Sidebar</title>
+    <!-- Include Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include Font Awesome for better icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <link rel="stylesheet" href="src/style.css" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "rgba(0, 0, 0, 0.7)", // Green color
+              secondary: "#1F2937", // Dark color for text
+              accent: "#4F46E5", // Purple accent
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .sidebar-shadow {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Arrow Toggle Button (replaces hamburger) -->
+    <div
+      id="sidebarToggle"
+      class="fixed top-1/2 transform -translate-y-1/2 left-0 cursor-pointer bg-amber-400 p-2 rounded-r-md shadow-md z-40 transition-all duration-300"
+    >
+      <i class="fas fa-chevron-right text-primary text-xl"></i>
+    </div>
+
+    <!-- Sidebar -->
+    <div
+      id="sidebar"
+      class="fixed left-0 h-screen bg-black/50 backdrop-blur-md sidebar-shadow overflow-y-auto transition-all duration-300 ease-in-out w-1/4 z-30 transform -translate-x-full"
+    >
+      <div class="relative h-full">
+        <!-- Logo and School Name Section -->
+        <div class="bg-gradient-to-r from-primarp-6 text-center relative">
+          <div class="w-96 h-96 mx-auto mb-3 p-1">
+            <img
+              src="/public/img/Logo_Naratel.png"
+              alt="School Logo"
+              class="w-full h-full object-contain rounded-full"
+            />
+          </div>
+          <em
+            ><h1 class="text-4xl font-bold text-white">
+              PT. Naraya Telematika
+            </h1></em
+          >
+          <h2 class="text-md font-medium text-white mb-2">Malang</h2>
+        </div>
+
+        <!-- Menu Items -->
+        <div class="p-4">
+          <div class="mb-4">
+            <div
+              class="flex items-center p-3 rounded-lg hover:bg-amber-400 transition-all cursor-pointer border-t border-b mb-5"
+            >
+              <i class="fas fa-map-marker-alt text-primary mr-3"></i>
+              <em
+                ><h3 class="text-2xl font-light text-white border-white">
+                  Lokasi
+                </h3></em
+              >
+            </div>
+
+            <div
+              class="flex items-center p-3 rounded-lg hover:bg-amber-400 transition-all cursor-pointer border-t border-b"
+            >
+              <i class="fas fa-map text-primary mr-3"></i>
+              <em><h3 class="text-2xl font-light text-white">Maps</h3></em>
+            </div>
+          </div>
+
+          <!-- School Info with Icons -->
+          <div class="p-4 rounded-lg text-white text-3xl">
+            <div class="space-y-2 text-lg">
+              <p class="flex items-center">
+                <i class="fas fa-location-dot mr-2 w-4"></i>
+                Ruko Taman Borobudur Indah Kav. 33 Jalan Puncak Borobudur No. 1
+                Kota Malang, Jawa Timur, 65142
+              </p>
+              <p class="flex items-center">
+                <i class="fas fa-globe mr-2 w-4"></i>
+                <a
+                  href="https://kaptennaratel.com/"
+                  class="text-accent hover:underline"
+                  >kaptennaratel.com</a
+                >
+              </p>
+              <p class="flex items-center">
+                <i class="fas fa-envelope mr-2 w-4"></i>
+                <a
+                  href="mailto:sales@naratel.net.id"
+                  class="text-accent hover:underline"
+                >
+                  sales@naratel.net.id</a
+                >
+              </p>
+              <p class="flex items-center">
+                <i class="fas fa-phone mr-2 w-4"></i>
+                (0341) 4345807
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div
+          class="absolute bottom-0 left-0 right-0 p-4 flex justify-center space-x-4 border-t border-gray-100"
+        >
+          <!-- Facebook Icon -->
+          <a
+            href="#"
+            class="bg-gray-100 hover:bg-blue-100 p-3 rounded transition-all group"
+          >
+            <i
+              class="fab fa-facebook-f text-gray-600 group-hover:text-blue-600"
+            ></i>
+          </a>
+          <!-- Instagram Icon -->
+          <a
+            href="#"
+            class="bg-gray-100 hover:bg-pink-100 p-3 rounded transition-all group"
+          >
+            <i
+              class="fab fa-instagram text-gray-600 group-hover:text-pink-600"
+            ></i>
+          </a>
+          <!-- YouTube Icon -->
+          <a
+            href="#"
+            class="bg-gray-100 hover:bg-red-100 p-3 rounded transition-all group"
+          >
+            <i
+              class="fab fa-youtube text-gray-600 group-hover:text-red-600"
+            ></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay for mobile -->
+    <div
+      id="overlay"
+      class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-20"
+    ></div>
+
+    <div id="container">
+      <canvas id="renderCanvas"></canvas>
+    </div>
+
+    <!-- Main Content Area -->
+
+    <script src="/src/main.js"></script>
+  </body>
+</html>
